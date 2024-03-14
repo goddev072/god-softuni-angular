@@ -3734,7 +3734,7 @@ textarea.form-control-lg {
   --bs-navbar-active-color: rgba(0, 0, 0, 0.9);
   --bs-navbar-brand-padding-y: 0.3125rem;
   --bs-navbar-brand-margin-end: 1rem;
-  --bs-navbar-brand-font-size: 1.25rem;
+  --bs-navbar-brand-font-size: 2rem;
   --bs-navbar-brand-color: rgba(0, 0, 0, 0.9);
   --bs-navbar-brand-hover-color: rgba(0, 0, 0, 0.9);
   --bs-navbar-nav-link-padding-x: 0.5rem;
@@ -4429,19 +4429,7 @@ textarea.form-control-lg {
 }
 .accordion-item:not(:first-of-type) {
   border-top: 0;
-}
-.accordion-item:last-of-type {
-  border-bottom-right-radius: var(--bs-accordion-border-radius);
-  border-bottom-left-radius: var(--bs-accordion-border-radius);
-}
-.accordion-item:last-of-type .accordion-button.collapsed {
-  border-bottom-right-radius: var(--bs-accordion-inner-border-radius);
-  border-bottom-left-radius: var(--bs-accordion-inner-border-radius);
-}
-.accordion-item:last-of-type .accordion-collapse {
-  border-bottom-right-radius: var(--bs-accordion-border-radius);
-  border-bottom-left-radius: var(--bs-accordion-border-radius);
-}
+}auto
 
 .accordion-body {
   padding: var(--bs-accordion-body-padding-y) var(--bs-accordion-body-padding-x);
@@ -5328,7 +5316,7 @@ textarea.form-control-lg {
   left: 0;
   z-index: var(--bs-backdrop-zindex);
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   background-color: var(--bs-backdrop-bg);
 }
 .modal-backdrop.fade {
@@ -6566,7 +6554,7 @@ textarea.form-control-lg {
   left: 0;
   z-index: 1040;
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   background-color: #000;
 }
 .offcanvas-backdrop.fade {
@@ -7313,11 +7301,11 @@ textarea.form-control-lg {
 }
 
 .vh-100 {
-  height: 100vh !important;
+  height: 80vh !important;
 }
 
 .min-vh-100 {
-  min-height: 100vh !important;
+  min-height: 80vh !important;
 }
 
 .flex-fill {
@@ -10972,8 +10960,8 @@ html {
 }
 
 footer.footer {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 footer.footer .social-link {
   display: block;
@@ -11026,7 +11014,7 @@ footer.footer .social-link:hover {
 }
 @media (min-width: 992px) {
   .masthead {
-    height: 100vh;
+    height: 80vh;
   }
   .masthead h1, .masthead .h1 {
     font-size: 5.5rem;
