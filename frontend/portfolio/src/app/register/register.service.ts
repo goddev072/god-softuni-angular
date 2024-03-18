@@ -3,7 +3,6 @@ import { AbstractService } from '../common/abstract.service';
 import { RegisterUser } from "./register.component";
 import { AuthenticationService } from "../auth/authentication.service";
 
-
 @Injectable({
   providedIn: 'root'
 })
