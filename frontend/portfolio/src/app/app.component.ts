@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { loadingSub } from "./utils";
+import { loadingSub } from "src/app/utils/utils";
 
 @Component({
   selector: 'app-root',
