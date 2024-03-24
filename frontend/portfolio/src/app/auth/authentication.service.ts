@@ -4,7 +4,7 @@ import { LoginUser } from "../login/login.component";
 import { BehaviorSubject, finalize, Observable, of, share, switchMap } from "rxjs";
 import { Router } from "@angular/router";
 import firebase from "firebase/compat";
-import { loadingSub } from "../utils";
+import { loadingSub } from "src/app/utils/utils";
 import { RegisterUser, UserProfile } from "../register/register.component";
 import { AbstractService } from "../common/abstract.service";
 
