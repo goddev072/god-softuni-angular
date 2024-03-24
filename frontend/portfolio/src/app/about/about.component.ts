@@ -65,16 +65,3 @@ export class AboutComponent implements OnInit {
     }
   }
 }
-
-// title: 'I am a full stack software developer',
-//   description: 'Currently I study Softuni Java path. I am passionate about software development. I catch every moment to develope my   skills. I have experiance with Java technology for backend and Angular for frontned. I am familiar with databases relational and no     relational.\n' +
-// 'I am really for self development. When I am not working I like to read book tech and non tech. When I have time I like to play with electronic and iot stuff. On my weekends I like hiking on the mountain, this makes me feel relaxed and full of energy. Also sport every day to be in good health!',
-//   photoUrl: '',
-//   technology: {
-//   backend: 'Java',
-//     frontend: 'Angular'
-// }
-// console.log(data);
-// if(data) {
-//   data.aboutUser = this.userAbout;
-//   authService.updateUser(data).subscribe(() => console.log("user updated successfully"));
