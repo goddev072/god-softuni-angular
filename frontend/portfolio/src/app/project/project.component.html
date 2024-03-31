@@ -1,0 +1,120 @@
+<div class="d-flex justify-content-center mt-4">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    New project <i class="mdi mdi-plus"></i>
+  </button>
+</div>
+
+<!-- Modal -->
+<form #ngForm="ngForm">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add new project</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <div class="d-flex justify-content-center mb-4">
+              <div class="card" style="width: 18rem;">
+                <img
+                  [src]="this.projectImage ? URL.createObjectURL(projectImage) : 'assets/img/no-image.png'"
+                  class="card-img-top" alt="..."
+                >
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-center mb-4">
+              <button class="btn btn-primary" (click)="inputField.click()">Upload image</button>
+              <input #inputField hidden type="file" (change)="onFileChange($event)" ngModel name="pictureUrl"/>
+            </div>
+
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row">
+
+              <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                  <input type="text" id="name" class="form-control" [(ngModel)]="project.name" name="name" placeholder="name"/>
+                  <label class="form-label" for="name"><span></span>Name</label>
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                  <input type="text" id="url" class="form-control" name="url" placeholder="url" [(ngModel)]="project.url"/>
+                  <label class="form-label" for="url">Url</label>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-floating">
+                  <textarea type="text" id="description" class="form-control" name="description" placeholder="description" [(ngModel)]="project.description"></textarea>
+                  <label class="form-label" for="description">Description</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button #closeModal type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button (click)="submit(ngForm)" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!--&lt;!&ndash; Cards &ndash;&gt;-->
+<!--<div class="col-10 mx-auto mt-4">-->
+<!--  <div class="d-flex justify-content-between">-->
+<!--      <div class="card" style="width: 18rem;">-->
+<!--        <img [src]="" alt="...">-->
+<!--        <div class="card-body">-->
+<!--          <h5 class="card-title text-center"></h5>-->
+<!--          <hr>-->
+<!--          <div class="scroll">-->
+<!--            -->
+<!--          </div>-->
+<!--          <div class="d-flex justify-content-between">-->
+<!--            <a href="#" class="btn btn-primary">Go to project</a>-->
+<!--            <a href="#" class="btn btn-danger">Delete project</a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<section class="bg-light pt-5 pb-5 shadow-sm">
+  <div class="container">
+    <div class="row pt-5">
+      <div class="col-12">
+        <h3 class="text-uppercase border-bottom mb-4">Your Projects</h3>
+      </div>
+    </div>
+    <div class="row">
+      @for(project of projects; track $index) {
+        <!--ADD CLASSES HERE d-flex align-items-stretch-->
+        <div class="col-lg-4 mb-3 d-flex align-items-stretch">
+          <div class="card">
+            <div class="card-img-top">
+              <img [src]="project.pictureUrl ? project.pictureUrl : 'assets/img/no-image.png'"
+                class="card-img-top" class="card-img-top" alt="Card Image"
+              >
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ project.name }}</h5>
+              <p class="card-text mb-4"> {{ project.description }} </p>
+            </div>
+            <div class="d-flex justify-content-around pb-4">
+              <a href="#" class="btn btn-primary">Go to project</a>
+              <a href="#" class="btn btn-danger">Delete project</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
