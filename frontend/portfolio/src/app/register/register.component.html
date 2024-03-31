@@ -1,0 +1,132 @@
+<!-- Section: Design Block -->
+<section class="text-center">
+  <!-- Background image -->
+  <div class="p-5 bg-image" style="
+        background-color: var(--bs-yellow);
+        height: 300px;
+        "></div>
+  <!-- Background image -->
+
+  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+    <div class="card-body py-5 px-md-5">
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-4">
+          <h2 class="fw-bold mb-5">Sign up now</h2>
+          <form #ngForm="ngForm" (ngSubmit)="submit(ngForm)">
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                  <input type="text" id="firstName" class="form-control" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel" required placeholder="firstName" pattern="[a-zA-z]+"/>
+                  <label class="form-label" for="firstName">First name</label>
+                  @if(firstName.errors?.['required'] && (firstName.dirty || firstName.touched)) {
+                      <span style="color: red"> First name is required </span>
+                  }
+                  @if(firstName.errors?.['pattern'] && (firstName.dirty || firstName.touched)) {
+                    <span style="color: red"> First name must contain only a-zA-Z </span>
+                  }
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                  <input type="text" id="lastName" class="form-control" [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" required placeholder="Last name" pattern="[a-zA-z]+"/>
+                  <label class="form-label" for="lastName">Last name</label>
+                  @if(lastName.errors?.['required'] && (lastName.dirty || lastName.touched)) {
+                    <span style="color: red"> Last name is required </span>
+                  }
+                  @if(lastName.errors?.['pattern'] && (lastName.dirty || lastName.touched)) {
+                    <span style="color: red"> Last name must contain only a-zA-Z </span>
+                }
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                  <input type="text" id="phoneNumber" class="form-control" [(ngModel)]="user.phoneNumber" name="phoneNumber" #phoneNumber="ngModel" required placeholder="phone number" pattern="^([0-9\(\)\/\+ \-]*)$"/>
+                  <label class="form-label" for="phoneNumber">phone number</label>
+                  @if(phoneNumber.errors?.['required'] && (phoneNumber.dirty || phoneNumber.touched)) {
+                    <span style="color: red"> Phone number is required </span>
+                  }
+                  @if(phoneNumber.errors?.['pattern'] && (phoneNumber.dirty || phoneNumber.touched)) {
+                    <span style="color: red"> Phone number is not valid </span>
+                  }
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                  <input type="date" id="dateOfBirth" class="form-control" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" #dateOfBirth="ngModel" required placeholder="Date of birth"/>
+                  <label class="form-label" for="dateOfBirth">Date of birth</label>
+                  @if(dateOfBirth.errors?.['required'] && (dateOfBirth.dirty || dateOfBirth.touched)) {
+                    <span style="color: red"> Date of birth is required </span>
+                  }
+                </div>
+              </div>
+            </div>
+
+              <!-- Address input -->
+              <div class="form-floating mb-4">
+                <input type="email" id="address" class="form-control" [(ngModel)]="user.address" name="address" #address="ngModel" required placeholder="Address"/>
+                <label class="form-label" for="address">Address</label>
+                @if(address.errors?.['required'] && (address.dirty || address.touched)) {
+                  <span style="color: red"> Address is required </span>
+                }
+              </div>
+
+
+            <!-- Email input -->
+            <div class="form-floating mb-4">
+              <input type="email" id="email" class="form-control"  [(ngModel)]="user.email" name="email" #email="ngModel" required placeholder="Email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"/>
+              <label class="form-label" for="email">Email address</label>
+              @if(email.errors?.['required'] && (email.dirty || email.touched)) {
+                <span style="color: red"> Email address is required </span>
+              }
+              @else if(email.errors?.['pattern'] && (email.dirty || email.touched)) {
+                <span style="color: red"> Email address is invalid </span>
+              }
+            </div>
+
+            <!-- Password input -->
+            <div class="form-floating mb-4">
+              <input type="password" id="password" class="form-control" [(ngModel)]="user.password" name="password" #password="ngModel" required placeholder="Password"/>
+              <label class="form-label" for="password">Password</label>
+              @if(password.errors?.['required'] && (password.dirty || password.touched)) {
+                <span style="color: red"> Password is required </span>
+              }
+            </div>
+
+            <!-- Password input -->
+            <div class="form-floating mb-4">
+              <input type="password" id="confirmPassword" class="form-control" [(ngModel)]="user.confirmPassword" name="confirmPassword" #confirmPassword="ngModel" required placeholder="Confirm password"/>
+              <label class="form-label" for="confirmPassword">Confirm Password</label>
+              @if(confirmPassword.errors?.['required'] && (confirmPassword.dirty || confirmPassword.touched)) {
+                <span style="color: red"> Confirm Password is required </span>
+              }
+              @else if(!(user.confirmPassword === user.password) && (confirmPassword.dirty || confirmPassword.touched)) {
+                <span style="color: red"> Password not match </span>
+              }
+            </div>
+
+            <!-- Checkbox -->
+            <div class="form-check d-flex justify-content-center mb-4">
+              <input class="form-check-input me-2" type="checkbox" id="termAndConditions" value="true" checked [ngModel]="termsAndConditions"
+              (ngModelChange)="updateTermsAndConditions($event)" [ngModelOptions]="{ standalone: true }"/>
+              <label class="form-check-label" for="termAndConditions">
+                <span [style.color]="!termsAndConditions ? 'red' : 'black' ">Agree to Terms and Conditions </span>
+              </label>
+            </div>
+            <!-- Submit button -->
+            <button [disabled]="ngForm.invalid || !termsAndConditions" type="submit" class="btn btn-primary btn-block mb-4">
+              Sign up
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
