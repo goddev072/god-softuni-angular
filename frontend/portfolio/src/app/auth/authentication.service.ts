@@ -7,11 +7,12 @@ import firebase from "firebase/compat";
 import { loadingSub } from "src/app/utils/utils";
 import { RegisterUser, UserProfile } from "../register/register.component";
 import { AbstractService } from "../common/abstract.service";
+import {IAuthenticationService} from "./authentication.service.interface";
 
 const authenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 @Injectable({providedIn: 'root'})
-export class AuthenticationService extends AbstractService {
+export class AuthenticationService extends AbstractService implements IAuthenticationService {
 
   private _auth: AngularFireAuth = inject(AngularFireAuth);
   private readonly _accessToken: string | null;
@@ -41,6 +42,9 @@ export class AuthenticationService extends AbstractService {
     promise.then(user => {
       if(user && user.user) {
         let userId = user.user.uid;
+        console.log(this._auth.idToken.subscribe(data => console.log(data)));
+        this._auth.currentUser.then(data => console.log(data?.toJSON()));
+        this._auth.user.subscribe(data => console.log(data?.toJSON()));
         user.user?.getIdToken().then(token => {
           this.database.database.ref('users/' + userId).on("value", snapshot => {
             let currentUser: UserProfile = snapshot.val();

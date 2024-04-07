@@ -8,6 +8,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { environment } from 'src/environments/environment.development';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     NavigationComponent,
     FooterComponent,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule, // for firestore
+    AngularFirestoreModule,
+    NgbModule, // for firestore
 
   ],
   providers: [],

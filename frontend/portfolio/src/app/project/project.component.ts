@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, inject, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { AlertComponent } from "../alert/alert.component";
 import { FormsModule, NgForm } from "@angular/forms";
 import { ProjectService } from "./project.service";
@@ -6,7 +6,9 @@ import { loadingSub } from "src/app/utils/utils";
 import {UserProfile} from "../register/register.component";
 import {NgOptimizedImage} from "@angular/common";
 import {ImageUploadService} from "../common/image.service";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
+import {ToastService} from "../utils/toast-global/toast-service.service";
+import {ToastsContainer} from "../utils/toast-global/toasts-container.component";
 
 export interface Project {
   name: string;
@@ -16,8 +18,9 @@ export interface Project {
 }
 
 export interface ProjectMetadata {
-  projects: Project[],
-  userId: string
+  project: Project,
+  userId: UserProfile
+  projectId: string
 }
 
 @Component({
@@ -26,7 +29,8 @@ export interface ProjectMetadata {
   imports: [
     AlertComponent,
     FormsModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    ToastsContainer
   ],
   templateUrl: './project.component.html',
   styleUrl: './project.component.scss'
@@ -34,12 +38,17 @@ export interface ProjectMetadata {
 export class ProjectComponent implements OnInit {
 
   protected project: Project = {} as Project;
-  protected projects: Project[] = [];
+  protected projectsMetadata: ProjectMetadata[] = [];
   protected projectImage: any = null;
   protected readonly URL = URL;
   @ViewChild('closeModal')
   protected closeModal: ElementRef | undefined;
+  @ViewChild('successToast')
+  protected successToastTemplate: any;
+  @ViewChild('deleteToast')
+  protected deleteToastTemplate: any;
 
+  private toastService = inject(ToastService)
   private _currentUser: UserProfile;
 
   constructor (private pSvc: ProjectService, private iuSvc: ImageUploadService) {
@@ -48,14 +57,7 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
     loadingSub.next(true);
-    this.pSvc.getAll(this._currentUser.id)
-      .then(data => {
-        this.projects = Object.values(data.val());
-        console.log(this.projects);
-      })
-      .finally(() => loadingSub.next(false));
-
-
+    this.getAll()
   }
 
   submit (ngForm: NgForm) {
@@ -66,11 +68,13 @@ export class ProjectComponent implements OnInit {
         if(result) {
           value.pictureUrl = result;
         }
+        this.showSuccess(this.successToastTemplate);
         this.pSvc.save(this._currentUser.id, value).then(result => {
           if(this.closeModal) {
             this.closeModal.nativeElement.click();
           }
-        })
+          this.getAll();
+        }).catch( error => console.log("Error"))
       })
     // this.uploadFile(this.projectImage);
     //   this.pSvc.saveMetadata({
@@ -82,13 +86,38 @@ export class ProjectComponent implements OnInit {
   }
 
   uploadFile(file: any): Observable<string | null> {
-    return this.iuSvc.uploadImage(file, `/projects/${this._currentUser.id}/${this.projects.length}`);
+    return this.iuSvc.uploadImage(file, `/projects/${this._currentUser.id}/${this.projectsMetadata.length}`);
   }
 
   onFileChange(event: any) {
     this.projectImage = event?.target?.files[0];
   }
 
+  delete(projectMetadata: ProjectMetadata) {
+    this.pSvc.delete(projectMetadata).then(data => {
+      this.getAll();
+      this.showSuccess(this.deleteToastTemplate);
+    })
+  }
+
+  private getAll(): void {
+    this.pSvc.getAll(this._currentUser.id)
+      .then(data => {
+        this.projectsMetadata = Object.entries(data.val()).map(e => {
+          return {
+            project: <Project>e[1],
+            userId: this._currentUser,
+            projectId: e[0]
+          }
+        })
+        console.log(this.projectsMetadata);
+      })
+      .finally(() => loadingSub.next(false));
+  }
+
+  showSuccess(template: TemplateRef<any>) {
+    this.toastService.show({ template, classname: 'bg-success text-light', delay: 10000 });
+  }
 }
 
 

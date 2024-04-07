@@ -75,6 +75,8 @@
                 <img
                   loading="lazy"
                   [ngSrc]="userProfile?.aboutUser?.photoUrl ? userProfile.aboutUser.photoUrl : '/assets/img/img-placeholder.png'"
+                  [width]="50"
+                  [height]="50"
                 />
               </div>
             </div>
@@ -126,7 +128,7 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button #closeModal type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </div>
@@ -134,3 +136,7 @@
     </div>
   </div>
 </form>
+
+<ng-template #successToast> User updated successfully </ng-template>
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
