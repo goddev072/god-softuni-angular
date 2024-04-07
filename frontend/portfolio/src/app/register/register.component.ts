@@ -46,6 +46,5 @@ export class RegisterComponent {
 
   protected updateTermsAndConditions(event: boolean) {
     this.termsAndConditions = event
-    this.rSvc.doRegister(this.user);
   }
 }
