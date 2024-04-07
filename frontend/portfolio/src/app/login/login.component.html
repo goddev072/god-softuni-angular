@@ -6,78 +6,56 @@
           height: 300px;
           "></div>
     <!-- Background image -->
+  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+    <div class="card-body py-5 px-md-5">
 
-    <div class="card mx-4 mx-md-5 shadow-5-strong" style="
-          margin-top: -100px;
-          background: hsla(0, 0%, 100%, 0.8);
-          backdrop-filter: blur(30px);
-          ">
-      <div class="card-body py-5 px-md-5">
-
-        <div class="row d-flex justify-content-center">
-          <div class="col-lg-4">
-            <h2 class="fw-bold mb-5">Sign up now</h2>
-            <form #ngForm="ngForm">
-              <!-- 2 column grid layout with text inputs for the first and last names -->
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-outline">
-                    <input type="text" id="form3Example1" class="form-control" [(ngModel)]="user.email" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" #email="ngModel"/>
-                    <label class="form-label" for="form3Example1"><span></span>Email</label>
-                  </div>
-                  @if(email.errors?.['pattern'] && (email.dirty || email.touched)) {
-                    <span style="color: red"> Email address is invalid </span>
-                  }
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-4">
+          <h2 class="fw-bold mb-5">Sign up now</h2>
+          <form #ngForm="ngForm">
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-outline">
+                  <input type="text" id="form3Example1" class="form-control" [(ngModel)]="user.email" name="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" #email="ngModel"/>
+                  <label class="form-label" for="form3Example1"><span></span>Email</label>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-outline">
-                    <input type="password" id="form3Example2" class="form-control" [(ngModel)]="user.password" name="password" minlength="6" #password="ngModel"/>
-                    <label class="form-label" for="form3Example2">Password</label>
-                  </div>
-                  @if(password.errors?.['minlength'] && (password.dirty || password.touched)) {
-                    <span style="color: red"> Password must be min 6 symbols </span>
-                  }
-                </div>
-                @if(loginFailed) {
-                  <app-alert class="alert alert-danger p-0 m-0" message="email / password mismatch"></app-alert>
+                @if(email.errors?.['pattern'] && (email.dirty || email.touched)) {
+                  <span style="color: red"> Email address is invalid </span>
                 }
               </div>
-              <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-center mb-4 mt-4">
-                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
-                <label class="form-check-label" for="form2Example33">
-                  Subscribe to our newsletter
-                </label>
+              <div class="col-md-6">
+                <div class="form-outline">
+                  <input type="password" id="form3Example2" class="form-control" [(ngModel)]="user.password" name="password" minlength="6" #password="ngModel"/>
+                  <label class="form-label" for="form3Example2">Password</label>
+                </div>
+                @if(password.errors?.['minlength'] && (password.dirty || password.touched)) {
+                  <span style="color: red"> Password must be min 6 symbols </span>
+                }
               </div>
+              @if(loginFailed) {
+                <app-alert class="alert alert-danger p-0 m-0" message="email / password mismatch"></app-alert>
+              }
+            </div>
+            <!-- Checkbox -->
+            <div class="form-check d-flex justify-content-center mb-4 mt-4">
+              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example33" checked />
+              <label class="form-check-label" for="form2Example33">
+                Subscribe to our newsletter
+              </label>
+            </div>
 
-              <!-- Submit button -->
-              <button class="btn btn-primary btn-block mb-4" (click)="login(ngForm)">
-                Sign in
-              </button>
-
-              <!-- Register buttons -->
-<!--              <div class="text-center">-->
-<!--                <p>or sign in with:</p>-->
-<!--                <button type="button" class="btn btn-link btn-floating mx-1">-->
-<!--                  <i class="fab fa-facebook-f"></i>-->
-<!--                </button>-->
-
-<!--                <button type="button" class="btn btn-link btn-floating mx-1">-->
-<!--                  <i class="fab fa-google"></i>-->
-<!--                </button>-->
-
-<!--                <button type="button" class="btn btn-link btn-floating mx-1">-->
-<!--                  <i class="fab fa-twitter"></i>-->
-<!--                </button>-->
-
-<!--                <button type="button" class="btn btn-link btn-floating mx-1">-->
-<!--                  <i class="fab fa-github"></i>-->
-<!--                </button>-->
-<!--              </div>-->
-            </form>
-          </div>
+            <!-- Submit button -->
+            <button class="btn btn-primary btn-block mb-4" (click)="login(ngForm)">
+              Sign in
+            </button>
+          </form>
         </div>
       </div>
     </div>
-  </section>
-  <!-- Section: Design Block -->
+  </div>
+</section>

@@ -34,7 +34,6 @@ export class RegisterComponent {
   protected user: RegisterUser = {} as RegisterUser;
   protected termsAndConditions: boolean = true;
 
-
   constructor(private rSvc: RegisterService) {}
 
   protected submit(ngForm: NgForm) {

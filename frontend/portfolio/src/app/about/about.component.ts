@@ -79,6 +79,10 @@ export class AboutComponent implements OnInit {
 
       let value = ngForm.value;
 
+      if(!this.userProfile.aboutUser) {
+        this.userProfile.aboutUser = {} as UserAbout;
+      }
+
       this.userProfile.aboutUser.description = value.description;
       this.userProfile.aboutUser.title = value.title;
       this.userProfile.aboutUser.technology.backend = value.backend;

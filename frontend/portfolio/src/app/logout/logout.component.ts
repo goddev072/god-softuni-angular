@@ -16,5 +16,4 @@ export class LogoutComponent implements OnInit {
     localStorage.clear();
     this.authSvc.signOut();
   }
-
 }
