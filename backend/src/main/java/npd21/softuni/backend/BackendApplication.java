@@ -1,7 +1,6 @@
 package npd21.softuni.backend;
 
 import lombok.extern.slf4j.Slf4j;
-import org.mapstruct.ap.shaded.freemarker.template.utility.UndeclaredThrowableException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
