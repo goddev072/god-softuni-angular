@@ -9,6 +9,8 @@ public class AllowedUrls {
         "/api/v1/rest/test",
         "/test/**",
         "test",
+        "/users/**",
+        "/api/v1/rest/users/**",
         "/v2/api-docs",
         "/v3/api-docs",
         "/v3/api-docs/**",
