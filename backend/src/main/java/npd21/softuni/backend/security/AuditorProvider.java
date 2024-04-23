@@ -23,6 +23,6 @@ public class AuditorProvider implements AuditorAware<UUID> {
         }
 
         User user = (User) authentication.getPrincipal();
-        return Optional.ofNullable(user.getId());
+        return Optional.ofNullable(UUID.fromString(user.getId()));
     }
 }
